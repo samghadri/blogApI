@@ -1,0 +1,3 @@
+mysite_blog/mysite_blog/secret_key.py
+mysite_blog/mysite_blog/__pycache__
+mysite_blog/db.sqlite3
