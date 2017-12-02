@@ -11,10 +11,10 @@ class PostSerializer(ModelSerializer):
 class PostDetailSerializer(ModelSerializer):
     class Meta:
         model = Post
-        fields =['author','title','text','slug']
+        fields =['author', 'title', 'text', 'slug']
 
 
 class PostCreateUpdateSerializer(ModelSerializer):
     class Meta:
         model = Post
-        fields =['author','title','text']
+        fields =['author', 'title','text']
