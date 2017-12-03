@@ -44,10 +44,13 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
+    slug = models.SlugField(allow_unicode=True, unique=True)
 
-    def approve(self):
+    def approve(self,*args,**kwargs):
+
+        self.slug = slugify(self.author)
         self.approved_comment = True
-        self.save()
+        super().save(*args,**kwargs)
 
     def get_absolute_url(self):
         return reverse("post_list")
