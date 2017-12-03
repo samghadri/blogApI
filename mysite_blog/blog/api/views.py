@@ -10,6 +10,7 @@ from rest_framework.permissions import (AllowAny,
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .permissions import IsOwnerOrReadOnly
 from django.db.models import Q
+from .pagination import PostLimitOffsetPagination,PostPageNumberPagination
 
 
 class PostApi(ListAPIView):
@@ -17,6 +18,7 @@ class PostApi(ListAPIView):
     serializer_class = PostSerializer
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['title','author__first_name','text']
+    pagination_class = PostPageNumberPagination
 
     def get_queryset(self, *args,**kwargs):
         queryset_list = Post.objects.all()
@@ -44,6 +46,7 @@ class PostDeleteApi(DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 
