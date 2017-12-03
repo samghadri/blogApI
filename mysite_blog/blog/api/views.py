@@ -1,11 +1,15 @@
 from rest_framework.generics import (ListAPIView, RetrieveAPIView,
-                                    UpdateAPIView, DestroyAPIView, CreateAPIView)
+                                    RetrieveUpdateAPIView, DestroyAPIView, CreateAPIView)
 from blog.models import Post
 from .serializers import PostSerializer, PostDetailSerializer, PostCreateUpdateSerializer
 from rest_framework.permissions import (AllowAny,
                                         IsAuthenticated,
                                         IsAdminUser,
-                                        IsAuthenticatedOrReadOnly)
+                                        IsAuthenticatedOrReadOnly,
+                                        )
+
+from .permissions import IsOwnerOrReadOnly
+
 
 class PostApi(ListAPIView):
     queryset = Post.objects.all()
@@ -25,10 +29,12 @@ class PostDeleteApi(DestroyAPIView):
     lookup_field = 'slug'
 
 
-class PostUpdateApi(UpdateAPIView):
+
+class PostUpdateApi(RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateUpdateSerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class PostCreateApi(CreateAPIView):
