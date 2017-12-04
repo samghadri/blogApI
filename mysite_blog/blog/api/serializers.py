@@ -40,6 +40,7 @@ class PostCreateUpdateSerializer(ModelSerializer):
         fields =['author', 'title','text']
 
 
+
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment

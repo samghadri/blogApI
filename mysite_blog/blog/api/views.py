@@ -1,7 +1,6 @@
 from rest_framework.generics import (ListAPIView, RetrieveAPIView,
                                     RetrieveUpdateAPIView, DestroyAPIView,
                                     CreateAPIView)
-
 from blog.models import Post, Comment
 from .serializers import PostSerializer, PostDetailSerializer, PostCreateUpdateSerializer, CommentSerializer
 
@@ -10,7 +9,6 @@ from rest_framework.permissions import (AllowAny,
                                         IsAdminUser,
                                         IsAuthenticatedOrReadOnly,
                                         )
-
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .permissions import IsOwnerOrReadOnly
 from django.db.models import Q
