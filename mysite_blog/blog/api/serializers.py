@@ -47,6 +47,4 @@ class CommentSerializer(ModelSerializer):
         fields =[
         'author',
         'text',
-        'created_date',
-        'post',
         ]
